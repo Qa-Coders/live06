@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "d703b775-b819-4e7d-b053-5bffec43bd11",
+		"name": "CEP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2699813"
+	},
+	"item": [
+		{
+			"name": "consultacep",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"function consultaCEP() {\r",
+							"    var consultaCEP = [\"07176690\", \"18550001\"];\r",
+							"\r",
+							"    var randomItem = consultaCEP[Math.floor(Math.random() * consultaCEP.length)];\r",
+							"    \r",
+							"    return randomItem; \r",
+							"}\r",
+							"    \r",
+							"pm.environment.set(\"Cep\", consultaCEP());\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "viacep.com.br/ws/{{Cep}}/json/",
+					"host": [
+						"viacep",
+						"com",
+						"br"
+					],
+					"path": [
+						"ws",
+						"{{Cep}}",
+						"json",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
